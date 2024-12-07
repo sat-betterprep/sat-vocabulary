@@ -1,0 +1,21 @@
+name: Parse MD to Dropbox
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'slides/sat-vocabulary/**'
+  workflow_dispatch:
+
+jobs:
+  run-script-via-ssh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: SSH to mini-ivy server and run build/copy script
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: bin/update-repo-and-copy-presentation-files.sh -r sat-vocabulary -o /home/app/Dropbox/sat-vocabulary/presentation -f
