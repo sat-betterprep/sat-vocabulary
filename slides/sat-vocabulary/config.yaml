@@ -1,0 +1,6 @@
+title: SAT vocabulary questions
+html: vocabulary.html
+sections:
+    - README.md
+enable:
+    - mathjax
